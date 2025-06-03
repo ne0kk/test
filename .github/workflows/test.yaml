@@ -2,7 +2,7 @@ name: Release Build
 
 on:
   push:
-    tags:
+    branches:
       - '**'
 
 jobs:
@@ -10,4 +10,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Print Tag
-        run: echo ${{github.ref_name}}
+        env:
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+        run: |
+          echo ${{github.ref_name}}
+          echo $IMAGE_TAG
+
