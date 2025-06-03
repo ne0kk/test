@@ -1,15 +1,17 @@
-name: ci
+         
+name: Docker Image CI
 
 on:
   push:
     branches: [ "main" ]
     tags:
-      - '*' 
+      - '*'
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  my_build_job:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -22,14 +24,12 @@ jobs:
           username: ${{ secrets.USER_DOCKER_HUB }}
           password: ${{ secrets.TOKEN_DOCKER_HUB }}
 
-      - name: Сборка Docker-образа
+      - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
-          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || "latest" }}
+          CR_REGISTRY: crpd8j7bbfi9io9g9qdt
+          CR_REPOSITORY: clock-app
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
         run: |
-          docker build . --file Dockerfile --tag nginx:$IMAGE_TAG
-          docker tag nginx:$IMAGE_TAG ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
-          docker push ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
-          
-
-
-          
+          docker build -t ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG -t nginx:latest .
+          docker push ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG
+          docker push ${{ secrets.USER_DOCKER_HUB }}:latest
