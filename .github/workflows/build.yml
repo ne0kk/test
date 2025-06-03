@@ -2,10 +2,11 @@ name: ci
 
 on:
   push:
-    branches:
-      - "**"
+    branches: [ "main" ]
     tags:
-      - "v*.*.*"
+      - '*'
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   my_build_job:
