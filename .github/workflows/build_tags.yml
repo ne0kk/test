@@ -3,6 +3,7 @@ name: Docker Image CI
 
 on:
   push:
+    branches: [ "main" ]
     tags:
       - '*'
   pull_request:
@@ -25,7 +26,7 @@ jobs:
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
-          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+           IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'latest' }}
         run: |
           docker build . --file Dockerfile --tag nginx:$IMAGE_TAG
           docker tag nginx:$IMAGE_TAG ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
