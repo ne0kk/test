@@ -26,8 +26,6 @@ jobs:
 
       - name: Build, tag, and push image to Yandex Cloud Container Registry
         env:
-          CR_REGISTRY: crpd8j7bbfi9io9g9qdt
-          CR_REPOSITORY: clock-app
           IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
         run: |
           docker build -t ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG -t nginx:latest .
