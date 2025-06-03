@@ -23,10 +23,14 @@ jobs:
           password: ${{ secrets.TOKEN_DOCKER_HUB }}
 
       - name: Сборка Docker-образа
+        env:
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
         run: |
           docker build . --file Dockerfile --tag nginx:latest
-          docker tag nginx:latest ${{ secrets.USER_DOCKER_HUB }}/nginx:latest
-
+          docker tag nginx:latest ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
+          
       - name: Push Docker-образа в Docker Hub
-        run: |
+        run: |        
+          docker push ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
           docker push ${{ secrets.USER_DOCKER_HUB }}/nginx:latest
+          
