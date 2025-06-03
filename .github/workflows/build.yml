@@ -1,9 +1,15 @@
 name: Сборка Docker-образа
-
 on:
   push:
+    # Sequence of patterns matched against refs/heads
     branches:
+      - main
+      - 'mona/octocat'
+      - 'releases/**'
+    # Sequence of patterns matched against refs/tags
+    tags:
       - '*'
+
 jobs:
   my_build_job:
     runs-on: ubuntu-latest
