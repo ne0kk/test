@@ -19,7 +19,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.USER_DOCKER_HUB }}
-          password: ${{ secrets.MY_TOKEN_DOCKER_HUB }}
+          password: ${{ secrets.TOKEN_DOCKER_HUB }}
 
       - name: Сборка Docker-образа
         run: |
