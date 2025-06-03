@@ -30,10 +30,9 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag nginx:$IMAGE_TAG
           docker tag nginx:$IMAGE_TAG ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
-
-      - name: Push Docker-образа в Docker Hub
-        run: |
           docker push ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
+
+
 
 
 
