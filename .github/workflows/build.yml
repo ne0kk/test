@@ -26,7 +26,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
         run: |
-          docker build . --file Dockerfile --tag nginx:latest
+          docker build . --file Dockerfile --tag nginx:$IMAGE_TAG
           docker tag nginx:latest ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
           
       - name: Push Docker-образа в Docker Hub
