@@ -24,7 +24,7 @@ jobs:
 
       - name: Сборка Docker-образа
         env:
-          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || "latest" }}
         run: |
           docker build . --file Dockerfile --tag nginx:$IMAGE_TAG
           docker tag nginx:$IMAGE_TAG ${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
