@@ -28,6 +28,6 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
         run: |
-          docker build -t ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG -t nginx:latest .
+          docker build -t ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG -t nginx:$IMAGE_TAG .
           docker push ${{ secrets.USER_DOCKER_HUB }}:$IMAGE_TAG
-          docker push ${{ secrets.USER_DOCKER_HUB }}:latest
+
