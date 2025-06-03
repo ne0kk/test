@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Print Tag
         env:
-          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'latest' }}
         run: |
           echo ${{github.ref_name}}
           echo $IMAGE_TAG
