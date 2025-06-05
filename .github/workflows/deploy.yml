@@ -44,7 +44,7 @@ jobs:
           YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
           YC_CLUSTER_ID: ${{ secrets.YC_CLUSTER_ID }}
         run: |
-          yc managed-kubernetes cluster get-credentials catk0hl8teaai3obm999 --external --force
+          yc managed-kubernetes cluster get-credentials --id "${YC_CLUSTER_ID}" --external
           kubectl get nodes
 
       # Шаг 6: Деплой приложения
