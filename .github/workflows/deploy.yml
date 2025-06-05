@@ -55,8 +55,6 @@ jobs:
           kubectl config view
           kubectl get nodes
           kubectl get pods --all-namespaces
-          IMAGE_NAME=${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG kubectl apply -f Nginx-DaemonSet.yml 
-          kubectl apply -f Nginx-Service.yml
-        
+          kubectl apply -f Nginx-DaemonSet.yml -f Nginx-Service.yml
         # kubectl create deployment nginx --image=${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
 
