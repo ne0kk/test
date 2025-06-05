@@ -1,4 +1,3 @@
-
 name: Deploy to Yandex Cloud Kubernetes
 
 on:
@@ -24,11 +23,11 @@ jobs:
       # Шаг 3: Аутентификация в Yandex Cloud
       - name: Authenticate in Yandex Cloud
         env:
-          YC_SA_KEY: ${{ secrets.YC_SA_KEY }}
+          YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
           YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
           YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         run: |
-          echo "${YC_SA_KEY}" > yc-sa-key.json
+          echo "${YC_SERVICE_ACCOUNT_KEY}" > yc-sa-key.json
           yc config set service-account-key yc-sa-key.json
           yc config set cloud-id "${YC_CLOUD_ID}"
           yc config set folder-id "${YC_FOLDER_ID}"
@@ -42,7 +41,7 @@ jobs:
       # Шаг 5: Настройка подключения к Kubernetes
       - name: Configure kubectl
         env:
-          YC_SA_KEY: ${{ secrets.YC_SA_KEY }}
+          YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
           YC_CLUSTER_ID: ${{ secrets.YC_CLUSTER_ID }}
         run: |
           yc managed-kubernetes cluster get-credentials --id "${YC_CLUSTER_ID}" --external
