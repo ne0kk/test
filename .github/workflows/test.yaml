@@ -1,0 +1,21 @@
+name: Release Build
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - '*'
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Print Tag
+        env:
+          IMAGE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'latest' }}
+        run: |
+          echo ${{github.ref_name}}
+          echo $IMAGE_TAG
+
