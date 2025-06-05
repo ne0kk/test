@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ne0kk/nginx:latest
+        image: ${IMAGE_NAME:-ne0kk/nginx:latest} 
