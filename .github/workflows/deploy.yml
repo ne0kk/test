@@ -55,7 +55,6 @@ jobs:
           kubectl config view
           kubectl get nodes
           kubectl get pods --all-namespaces
-          kubectl create namespace application
           kubectl apply -f .
         # kubectl create deployment nginx --image=${{ secrets.USER_DOCKER_HUB }}/nginx:$IMAGE_TAG
 
